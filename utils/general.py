@@ -850,7 +850,7 @@ def non_max_suppression_obb(prediction, conf_thres=0.25, iou_thres=0.45, classes
         rboxes = x[:, :5].clone() 
         rboxes[:, :2] = rboxes[:, :2] + c # rboxes (offset by class)
         scores = x[:, 5]  # scores
-        _, i = obb_nms(rboxes, scores, iou_thres)
+        _, i = obb_nms(rboxes, scores, iou_thres, prediction.device.index)
         if i.shape[0] > max_det:  # limit detections
             i = i[:max_det]
 
